@@ -85,5 +85,42 @@ class Library{
         } else 
         return null;
     }
-    
 }
+
+class Student {
+    #journal;
+    constructor(name, gender, age) {
+      this.name = name;
+      this.gender = gender;
+      this.age = age;
+      this.#journal = {};
+    }
+  
+    addMark(mark, subject) {
+      if (mark < 1 || mark > 5 || typeof mark !== "number") {
+        console.log(`Оценка должна быть числом от 1 до 5 включительно`);
+        return;
+      } else if (this.#journal[subject] === undefined) {
+        //проверяет, есть ли свойство, если нет - создает
+        this.#journal[subject] = [];
+      }
+      return this.#journal[subject].push(mark); //добавляет в свойство оценку
+    }
+  
+    getAverageBySubject(subject) {
+      // средняя по предмету
+      let sum = 0;
+      this.#journal[subject].forEach((mark) => (sum += mark));
+      return sum / this.#journal[subject].length;
+    }
+  
+    getAverage() {                                                       // средняя оценка
+      let sum = 0;
+      let subjects = 0;
+      Object.entries(this.#journal).forEach(([subject]) => {
+        sum += this.getAverageBySubject(subject);
+        subjects++;
+      });
+      return sum / subjects;
+    }
+  }
