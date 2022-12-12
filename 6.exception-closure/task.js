@@ -7,9 +7,7 @@ function parseCount(item) {
 
 function validateCount(item){
     try{
-        let result = parseCount(item);
-        !isNaN(result);
-        return result;
+        return parseCount(item);
     }
     catch (error){
         return error;
